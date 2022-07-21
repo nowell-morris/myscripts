@@ -1,0 +1,12 @@
+## This is where variables will be declared and be sourced from
+## from the various scripts and functions within
+
+recommended_ami=ami-0f846c06eb372f19a
+amiversiontouse=ami-0f846c06eb372f19a
+date_ami_was_checked=082719-13:54
+shouldwepatchstaging=Y
+shouldwepatchprod=N
+CFprod=<ecs-cluster-name>
+
+
+#####################
