@@ -1,0 +1,19 @@
+#!/bin/bash
+#isstagingpatched=0
+stackname2patch=null
+environment2patch=nowell-test-cluster1
+#recommended_ami=recommended_test
+
+
+amiversiontouse=ami-0b16d80945b1a9c7d
+date_ami_was_checked=082719-13:54
+shouldwepatchstaging=Y
+shouldwepatchprod=N
+ispatchingcyclecomplete=Y/N
+
+CFstaging=
+CFprod=<name of stack in Prod>
+autoscaling_group_prod=<name of autoscaling group in Prod>
+autoscaling_group_staging=
+stackname-prod=
+stackname-staging=

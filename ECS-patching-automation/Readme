@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# this is for automated patching of underlying AMIs of our ecs clusters
+# nowell.morris@linuxacademy.com v 0.1
+
+
+
+static entries that must remain and be edited
+
+compare.sh - stackname2patch entries for staging and production
+tags MUST remain on the stacknames in cloudformation in order for us to associate stacks to autoscaling groups
+
+
+
+
+
+
+
+
+image.sh
+
+# we need to see what environment we are going to patch
+#
+#    We will generally follow this logic
+#    
+#    Is a new AMI available?
+#      Then update our cloudformation script
+#check staging for AMI version, is it the same?
+#
+#
+#
+#
+#    If staging has been patched is true
+#      Then patch production
+#      Else patch staging
+#    
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+1 cron job to see if there is a new AMI
+2 cron job to see if we need to patch staging
+3 cron job to see if staging is patched, if so patch production
+
+
+# 1st cron script run on monday every 2 weeks
+Is there a new AMI?  to find out we need to check our current AMI and compare against recommended ami AND check for cycle complete 
+if there is a new AMI, then mark Y for patch staging and mark ami version to use for next staging
+
+
+# 2nd cron script run on a thursday night, early friday morning bi weekly
+staging do we need to patch?  check our file for a Y, and validate that the current AMI is different than recommended
+if both are true, then we begin patching by 1. find current number of running instances 2. update cloudformation script with new ami 3. start instance replacement loop
+when complete, disable mark for patching staging, and mark Y for production patching
+
+
+# 3rd cron script on opposite thursday nights, early friday mornings biweekly
+production do we need to patch? check our file for a Y, and validate that the current AMI is different than recommended AND the recommended is the same as staging
+if all is true, then we begin patching cycle as we did above
+when complete, disable mark for patching production, mark cycle complete
