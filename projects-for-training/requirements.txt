@@ -1,0 +1,15 @@
+# written by Nowell Morris, August 2022
+# in order to use this script you must have an API key with GCP
+# this key needs to have API access to the geocoding API
+# https://console.cloud.google.com/apis/dashboard? and
+# https://console.cloud.google.com/google/maps-apis/api-list?project=weather-geocoding 
+# place this key value, and no other text, into a file called api_key.txt
+
+
+# needed pip packages
+requests
+googlemaps 
+json
+
+
+
