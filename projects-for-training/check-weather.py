@@ -5,6 +5,7 @@ import googlemaps
 from datetime import datetime
 
 
+# prompt user for the address they wish to get a forecast for
 def getthelocation():
     # obtain the API key from our text file api_key.txt 
     apikeyfile = open('api_key.txt', 'r')
@@ -34,6 +35,7 @@ def getthelocation():
         #   },
 
 
+# this takes in our latitude and longitude and then obtains the weather data from weather.gov and returns it as a true json object
 def gettheweather(lat_var, lon_var):
     latitudevar = format(lat_var, '.4f')
     longitudevar = format(lon_var, '.4f')
@@ -50,10 +52,20 @@ def gettheweather(lat_var, lon_var):
     # this is the json object: forecastjson
     # print(json.dumps(forecastjson, indent=2)) # by using the json.dumps(x, indent=2) it formats the json to be readable
     # print(json.dumps(forecastjson['properties']['periods'][0], indent=2))
+    return forecastjson
+
+
+# let the user decide how many days forecast they want
+def askuserhowmanydays():  
     howmanydays = int(input("How many days forecast do you want? (1-7): "))
-    doubleup = howmanydays * 2  # this is because the json has two entries per day. one for day, one for night
+    return howmanydays
+
+
+# we now take the requested forecast number of days, and the weather data and render it
+def slicendiceforecast(howmanyuserdays, forecastjsonobject):   
+    doubleup = howmanyuserdays * 2  # this is because the json has two entries per day. one for day, one for night
     for i in range(doubleup):
-        print(json.dumps(forecastjson['properties']['periods'][i], indent=2))
+        print(json.dumps(forecastjsonobject['properties']['periods'][i], indent=2))
 
     # make a UI with https://rich.readthedocs.io/en/latest/console.html  
 
@@ -65,5 +77,6 @@ def gettheweather(lat_var, lon_var):
 xandy = getthelocation()
 lati_var = xandy['lat']
 long_var = xandy['lng']
-gettheweather(lati_var, long_var)
-
+data = gettheweather(lati_var, long_var)
+days = askuserhowmanydays()
+slicendiceforecast(days, data )
